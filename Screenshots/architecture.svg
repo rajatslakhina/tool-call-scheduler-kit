@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 640" width="760" height="640" font-family="Menlo, Monaco, monospace">
+  <rect width="760" height="640" fill="#1e1e2e"/>
+  <text x="30" y="42" font-size="21" fill="#f5f5f5" font-weight="bold">ToolCallSchedulerKit Architecture</text>
+  <text x="30" y="63" font-size="12" fill="#9399b2">One turn&#8217;s parallel tool calls, run as concurrently as their effects allow</text>
+  <rect x="170" y="85" width="420" height="48" rx="8" fill="#313244" stroke="#89b4fa" stroke-width="2"/>
+  <text x="380" y="114" font-size="13" fill="#cdd6f4" text-anchor="middle">[ScheduledToolCall] (id, toolName, arguments, dependsOn)</text>
+  <line x1="380" y1="133" x2="380" y2="163" stroke="#89b4fa" stroke-width="2"/><polygon points="380,171 374,159 386,159" fill="#89b4fa"/>
+  <rect x="30" y="173" width="250" height="92" rx="8" fill="#313244" stroke="#94e2d5" stroke-width="2"/>
+  <text x="155" y="198" font-size="13" fill="#94e2d5" text-anchor="middle" font-weight="bold">ToolEffectCatalog</text>
+  <text x="155" y="220" font-size="11" fill="#bac2de" text-anchor="middle">tool &#8594; reads / writes ResourceKeys</text>
+  <text x="155" y="238" font-size="11" fill="#bac2de" text-anchor="middle">narrowed by an argument (path=&#8230;)</text>
+  <text x="155" y="256" font-size="11" fill="#f9e2af" text-anchor="middle">undeclared tool = barrier</text>
+  <line x1="280" y1="219" x2="318" y2="219" stroke="#94e2d5" stroke-width="2"/><polygon points="326,219 314,213 314,225" fill="#94e2d5"/>
+  <rect x="328" y="173" width="400" height="92" rx="8" fill="#45475a" stroke="#f9e2af" stroke-width="3"/>
+  <text x="528" y="198" font-size="15" fill="#f9e2af" text-anchor="middle" font-weight="bold">ToolCallPlanner (pure)</text>
+  <text x="528" y="220" font-size="11" fill="#bac2de" text-anchor="middle">declared dependency edges (failure propagates)</text>
+  <text x="528" y="238" font-size="11" fill="#bac2de" text-anchor="middle">conflict edges in emission order (order only)</text>
+  <text x="528" y="256" font-size="11" fill="#bac2de" text-anchor="middle">Kahn layering &#8594; waves; cycle / dup / unknown id throw</text>
+  <line x1="528" y1="265" x2="528" y2="295" stroke="#f9e2af" stroke-width="2"/><polygon points="528,303 522,291 534,291" fill="#f9e2af"/>
+  <rect x="328" y="305" width="400" height="60" rx="8" fill="#313244" stroke="#cba6f7" stroke-width="2"/>
+  <text x="528" y="330" font-size="13" fill="#cba6f7" text-anchor="middle" font-weight="bold">SchedulePlan</text>
+  <text x="528" y="351" font-size="11" fill="#bac2de" text-anchor="middle">waves &#183; edges &#183; sequentialRounds vs criticalPathLength</text>
+  <line x1="528" y1="365" x2="528" y2="395" stroke="#cba6f7" stroke-width="2"/><polygon points="528,403 522,391 534,391" fill="#cba6f7"/>
+  <rect x="170" y="405" width="558" height="100" rx="8" fill="#45475a" stroke="#a6e3a1" stroke-width="3"/>
+  <text x="449" y="432" font-size="15" fill="#a6e3a1" text-anchor="middle" font-weight="bold">ToolCallScheduler (actor)</text>
+  <text x="449" y="454" font-size="11" fill="#bac2de" text-anchor="middle">TaskGroup, bounded by maxConcurrency; starts a call the moment</text>
+  <text x="449" y="472" font-size="11" fill="#bac2de" text-anchor="middle">its predecessors finish (not wave-by-wave)</text>
+  <text x="449" y="490" font-size="11" fill="#bac2de" text-anchor="middle">ExecutionState: pending counts, skip propagation, ready queue</text>
+  <rect x="30" y="405" width="120" height="100" rx="8" fill="#313244" stroke="#fab387" stroke-width="2"/>
+  <text x="90" y="440" font-size="12" fill="#fab387" text-anchor="middle" font-weight="bold">Handler</text>
+  <text x="90" y="460" font-size="10" fill="#bac2de" text-anchor="middle">your tool code,</text>
+  <text x="90" y="476" font-size="10" fill="#bac2de" text-anchor="middle">e.g. ToolRegistry</text>
+  <line x1="150" y1="455" x2="162" y2="455" stroke="#fab387" stroke-width="2"/>
+  <line x1="449" y1="505" x2="449" y2="535" stroke="#a6e3a1" stroke-width="2"/><polygon points="449,543 443,531 455,531" fill="#a6e3a1"/>
+  <rect x="170" y="545" width="558" height="66" rx="8" fill="#313244" stroke="#89b4fa" stroke-width="2"/>
+  <text x="449" y="570" font-size="13" fill="#89b4fa" text-anchor="middle" font-weight="bold">ScheduleReport &#8594; tool messages back to the provider</text>
+  <text x="449" y="592" font-size="11" fill="#bac2de" text-anchor="middle">records in emission order: succeeded / failed / skipped(blockedBy:) &#183; peakConcurrency</text>
+</svg>

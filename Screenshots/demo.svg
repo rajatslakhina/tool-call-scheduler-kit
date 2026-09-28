@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 913" width="900" height="913" font-family="Menlo, Monaco, monospace">
+  <rect width="900" height="913" rx="10" fill="#1e1e2e"/>
+  <circle cx="26" cy="24" r="7" fill="#f38ba8"/>
+  <circle cx="48" cy="24" r="7" fill="#f9e2af"/>
+  <circle cx="70" cy="24" r="7" fill="#a6e3a1"/>
+  <text x="450" y="29" font-size="13" fill="#7f849c" text-anchor="middle">$ swift run ToolCallSchedulerDemo &#8212; real captured output</text>
+  <line x1="0" y1="42" x2="900" y2="42" stroke="#313244" stroke-width="1"/>
+  <text x="26" y="64" font-size="12" fill="#89b4fa" font-weight="bold">ToolCallSchedulerKit&#160;demo</text>
+  <text x="26" y="98" font-size="12" fill="#89b4fa" font-weight="bold">1.&#160;One&#160;coding-agent&#160;turn,&#160;six&#160;calls</text>
+  <text x="26" y="115" font-size="12" fill="#89dceb">&#160;&#160;wave&#160;0:&#160;c1,&#160;c2,&#160;c4,&#160;c6</text>
+  <text x="26" y="132" font-size="12" fill="#89dceb">&#160;&#160;wave&#160;1:&#160;c3</text>
+  <text x="26" y="149" font-size="12" fill="#89dceb">&#160;&#160;wave&#160;2:&#160;c5</text>
+  <text x="26" y="166" font-size="12" fill="#bac2de">&#160;&#160;c1&#160;-&gt;&#160;c3&#160;&#160;[conflict&#160;on&#160;file:Package.swift]</text>
+  <text x="26" y="183" font-size="12" fill="#bac2de">&#160;&#160;c1&#160;-&gt;&#160;c5&#160;&#160;[conflict&#160;on&#160;file:Package.swift]</text>
+  <text x="26" y="200" font-size="12" fill="#bac2de">&#160;&#160;c3&#160;-&gt;&#160;c5&#160;&#160;[conflict&#160;on&#160;file:Package.swift]</text>
+  <text x="26" y="217" font-size="12" fill="#cdd6f4">&#160;&#160;sequential&#160;rounds:&#160;6,&#160;critical&#160;path:&#160;3</text>
+  <text x="26" y="234" font-size="12" fill="#cdd6f4">&#160;&#160;executing&#160;with&#160;maxConcurrency&#160;3:</text>
+  <text x="26" y="251" font-size="12" fill="#a6e3a1">&#160;&#160;c1&#160;&#160;&#160;#0&#160;&#160;ok&#160;&#160;&#160;&#160;&#160;&#160;read_file(Package.swift)</text>
+  <text x="26" y="268" font-size="12" fill="#a6e3a1">&#160;&#160;c2&#160;&#160;&#160;#1&#160;&#160;ok&#160;&#160;&#160;&#160;&#160;&#160;read_file(README.md)</text>
+  <text x="26" y="285" font-size="12" fill="#a6e3a1">&#160;&#160;c3&#160;&#160;&#160;#4&#160;&#160;ok&#160;&#160;&#160;&#160;&#160;&#160;write_file(Package.swift)</text>
+  <text x="26" y="302" font-size="12" fill="#a6e3a1">&#160;&#160;c4&#160;&#160;&#160;#2&#160;&#160;ok&#160;&#160;&#160;&#160;&#160;&#160;search_web(swift&#160;6.2&#160;release&#160;notes)</text>
+  <text x="26" y="319" font-size="12" fill="#a6e3a1">&#160;&#160;c5&#160;&#160;&#160;#5&#160;&#160;ok&#160;&#160;&#160;&#160;&#160;&#160;write_file(Package.swift)</text>
+  <text x="26" y="336" font-size="12" fill="#a6e3a1">&#160;&#160;c6&#160;&#160;&#160;#3&#160;&#160;ok&#160;&#160;&#160;&#160;&#160;&#160;get_weather(Delhi)</text>
+  <text x="26" y="353" font-size="12" fill="#cdd6f4">&#160;&#160;succeeded&#160;6,&#160;failed&#160;0,&#160;skipped&#160;0;&#160;peak&#160;concurrency&#160;3/3</text>
+  <text x="26" y="387" font-size="12" fill="#89b4fa" font-weight="bold">2.&#160;A&#160;failure&#160;only&#160;takes&#160;down&#160;calls&#160;that&#160;consumed&#160;its&#160;result</text>
+  <text x="26" y="404" font-size="12" fill="#89dceb">&#160;&#160;wave&#160;0:&#160;f1,&#160;f4,&#160;f6</text>
+  <text x="26" y="421" font-size="12" fill="#89dceb">&#160;&#160;wave&#160;1:&#160;f2,&#160;f5</text>
+  <text x="26" y="438" font-size="12" fill="#89dceb">&#160;&#160;wave&#160;2:&#160;f3</text>
+  <text x="26" y="455" font-size="12" fill="#bac2de">&#160;&#160;f1&#160;-&gt;&#160;f2&#160;&#160;[declared&#160;dependency]</text>
+  <text x="26" y="472" font-size="12" fill="#bac2de">&#160;&#160;f2&#160;-&gt;&#160;f3&#160;&#160;[declared&#160;dependency]</text>
+  <text x="26" y="489" font-size="12" fill="#bac2de">&#160;&#160;f4&#160;-&gt;&#160;f5&#160;&#160;[conflict&#160;on&#160;audit:*]</text>
+  <text x="26" y="506" font-size="12" fill="#cdd6f4">&#160;&#160;sequential&#160;rounds:&#160;6,&#160;critical&#160;path:&#160;3</text>
+  <text x="26" y="523" font-size="12" fill="#f38ba8">&#160;&#160;f1&#160;&#160;&#160;#0&#160;&#160;FAILED&#160;&#160;fetch_invoice&#160;returned&#160;HTTP&#160;503</text>
+  <text x="26" y="540" font-size="12" fill="#f9e2af">&#160;&#160;f2&#160;&#160;&#160;--&#160;&#160;SKIPPED&#160;blocked&#160;by&#160;f1</text>
+  <text x="26" y="557" font-size="12" fill="#f9e2af">&#160;&#160;f3&#160;&#160;&#160;--&#160;&#160;SKIPPED&#160;blocked&#160;by&#160;f1</text>
+  <text x="26" y="574" font-size="12" fill="#f38ba8">&#160;&#160;f4&#160;&#160;&#160;#1&#160;&#160;FAILED&#160;&#160;append_audit&#160;returned&#160;HTTP&#160;503</text>
+  <text x="26" y="591" font-size="12" fill="#a6e3a1">&#160;&#160;f5&#160;&#160;&#160;#3&#160;&#160;ok&#160;&#160;&#160;&#160;&#160;&#160;append_audit()</text>
+  <text x="26" y="608" font-size="12" fill="#a6e3a1">&#160;&#160;f6&#160;&#160;&#160;#2&#160;&#160;ok&#160;&#160;&#160;&#160;&#160;&#160;get_weather(Pune)</text>
+  <text x="26" y="625" font-size="12" fill="#cdd6f4">&#160;&#160;succeeded&#160;2,&#160;failed&#160;2,&#160;skipped&#160;2;&#160;peak&#160;concurrency&#160;3/4</text>
+  <text x="26" y="659" font-size="12" fill="#89b4fa" font-weight="bold">3.&#160;An&#160;undeclared&#160;tool&#160;runs&#160;alone,&#160;in&#160;emission&#160;order</text>
+  <text x="26" y="676" font-size="12" fill="#cdd6f4">&#160;&#160;run_shell&#160;declared:&#160;false</text>
+  <text x="26" y="693" font-size="12" fill="#89dceb">&#160;&#160;wave&#160;0:&#160;b1</text>
+  <text x="26" y="710" font-size="12" fill="#89dceb">&#160;&#160;wave&#160;1:&#160;b2</text>
+  <text x="26" y="727" font-size="12" fill="#89dceb">&#160;&#160;wave&#160;2:&#160;b3</text>
+  <text x="26" y="744" font-size="12" fill="#bac2de">&#160;&#160;b1&#160;-&gt;&#160;b2&#160;&#160;[barrier&#160;(undeclared&#160;tool)]</text>
+  <text x="26" y="761" font-size="12" fill="#bac2de">&#160;&#160;b2&#160;-&gt;&#160;b3&#160;&#160;[barrier&#160;(undeclared&#160;tool)]</text>
+  <text x="26" y="778" font-size="12" fill="#cdd6f4">&#160;&#160;sequential&#160;rounds:&#160;3,&#160;critical&#160;path:&#160;3</text>
+  <text x="26" y="812" font-size="12" fill="#89b4fa" font-weight="bold">4.&#160;Malformed&#160;batches&#160;are&#160;refused&#160;before&#160;anything&#160;runs</text>
+  <text x="26" y="829" font-size="12" fill="#fab387">&#160;&#160;duplicate&#160;id:&#160;duplicateCallID("x")</text>
+  <text x="26" y="846" font-size="12" fill="#fab387">&#160;&#160;unknown&#160;dependency:&#160;unknownDependency(callID:&#160;"y",&#160;dependsOn:&#160;"ghost")</text>
+  <text x="26" y="863" font-size="12" fill="#fab387">&#160;&#160;cycle:&#160;dependencyCycle(involving:&#160;["p",&#160;"q"])</text>
+  <text x="26" y="880" font-size="12" fill="#fab387">&#160;&#160;maxConcurrency&#160;0:&#160;invalidConcurrency(0)</text>
+</svg>

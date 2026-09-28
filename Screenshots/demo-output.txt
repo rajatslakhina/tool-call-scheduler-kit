@@ -1,0 +1,49 @@
+ToolCallSchedulerKit demo
+
+1. One coding-agent turn, six calls
+  wave 0: c1, c2, c4, c6
+  wave 1: c3
+  wave 2: c5
+  c1 -> c3  [conflict on file:Package.swift]
+  c1 -> c5  [conflict on file:Package.swift]
+  c3 -> c5  [conflict on file:Package.swift]
+  sequential rounds: 6, critical path: 3
+  executing with maxConcurrency 3:
+  c1   #0  ok      read_file(Package.swift)
+  c2   #1  ok      read_file(README.md)
+  c3   #4  ok      write_file(Package.swift)
+  c4   #2  ok      search_web(swift 6.2 release notes)
+  c5   #5  ok      write_file(Package.swift)
+  c6   #3  ok      get_weather(Delhi)
+  succeeded 6, failed 0, skipped 0; peak concurrency 3/3
+
+2. A failure only takes down calls that consumed its result
+  wave 0: f1, f4, f6
+  wave 1: f2, f5
+  wave 2: f3
+  f1 -> f2  [declared dependency]
+  f2 -> f3  [declared dependency]
+  f4 -> f5  [conflict on audit:*]
+  sequential rounds: 6, critical path: 3
+  f1   #0  FAILED  fetch_invoice returned HTTP 503
+  f2   --  SKIPPED blocked by f1
+  f3   --  SKIPPED blocked by f1
+  f4   #1  FAILED  append_audit returned HTTP 503
+  f5   #3  ok      append_audit()
+  f6   #2  ok      get_weather(Pune)
+  succeeded 2, failed 2, skipped 2; peak concurrency 3/4
+
+3. An undeclared tool runs alone, in emission order
+  run_shell declared: false
+  wave 0: b1
+  wave 1: b2
+  wave 2: b3
+  b1 -> b2  [barrier (undeclared tool)]
+  b2 -> b3  [barrier (undeclared tool)]
+  sequential rounds: 3, critical path: 3
+
+4. Malformed batches are refused before anything runs
+  duplicate id: duplicateCallID("x")
+  unknown dependency: unknownDependency(callID: "y", dependsOn: "ghost")
+  cycle: dependencyCycle(involving: ["p", "q"])
+  maxConcurrency 0: invalidConcurrency(0)
